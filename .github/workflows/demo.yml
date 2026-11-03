@@ -33,6 +33,11 @@ jobs:
         run: |
           echo "Files in my-custom-path directory:"
           ls -R my-custom-path
+      - name: Upload custom path artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifacts
+          path: my-custom-path/
   build:
     needs:
       - test
