@@ -17,6 +17,7 @@ jobs:
         run: npm run test
   path:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -63,3 +64,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: my-artifacts
+      - name: List files in the downloaded artifacts
+        run: |
+          echo "Files in downloaded artifacts:"
+          ls -R
