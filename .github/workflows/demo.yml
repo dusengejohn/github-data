@@ -50,7 +50,7 @@ jobs:
         with:
           name: my-artifacts
           path: |
-            my-custom-path
+            my-custom-path/
   deploy:
     needs: build
     runs-on: ubuntu-latest
