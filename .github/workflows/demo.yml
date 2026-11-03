@@ -25,8 +25,6 @@ jobs:
         run: mkdir -p my-custom-path
       - name : Create a file in the custom path
         run: echo "This is a first vesrion v1.0.0.1" > my-custom-path/version.txt
-      - name: copy logs into the custom path
-        run: cp *.log my-custom-path/logs.log
       - name: list files in root directory
         run: |
           echo "Files in root directory:"
