@@ -55,6 +55,7 @@ jobs:
         with:
           name: my-artifacts
           path: |
+            dist/
             my-custom-path/
   deploy:
     needs: build
