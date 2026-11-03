@@ -15,8 +15,27 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+  path:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a custom path
+        run: mkdir -p my-custom-path
+      - name : Create a file in the custom path
+        run: echo "This is a first vesrion v1.0.0.1" > my-custom-path/version.txt
+      - name: copy logs into the custom path
+        run: cp system.log my-custom-path/logs.log
+      - name: list files in root directory
+        run: |
+          echo "Files in root directory:"
+          ls -R
+      - name: list files in custom path
+        run: |
+          echo "Files in my-custom-path directory:"
+          ls -R my-custom-path
   build:
-    needs: test
+    needs:
+      - test
+      - path
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -29,10 +48,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: my-artifacts
-          path: dist
+          path: |
+            dist
+            my-custom-path
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
         run: echo "Deploying..."
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifacts
