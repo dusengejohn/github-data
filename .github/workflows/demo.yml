@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v4
+      - name: Run Application / Tests
+        run: |
+          npm install
+          npm test
       - name: Create a custom path
         run: mkdir -p my-custom-path
       - name : Create a file in the custom path
